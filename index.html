@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আনলিমিটেড ইন্টারনেট প্যাকেজ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans Bengali", "Segoe UI", Tahoma, sans-serif;
+      background: #101010; color: #f5f5f5; line-height: 1.65; padding: 18px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; padding: 18px 10px 24px; }
+    header h1 { color: #ff4444; font-size: clamp(1.6rem, 5vw, 2.4rem); margin-bottom: 8px; }
+    header p { color: #ccc; }
+    .offer-banner {
+      background: #ff4444; color: white; padding: 14px 16px; border-radius: 10px;
+      text-align: center; font-weight: 700; margin-bottom: 22px;
+    }
+    .packages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .package-card {
+      background: #1a1a1a; border: 1px solid #383838; border-radius: 14px;
+      padding: 20px; cursor: pointer; transition: .2s ease; min-width: 0;
+    }
+    .package-card:hover, .package-card.selected {
+      border-color: #ff4444; box-shadow: 0 0 0 2px #ff444422; transform: translateY(-2px);
+    }
+    .package-card h2 { font-size: 1.2rem; margin-bottom: 10px; }
+    .price { color: #ff5555; font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+    .features p { color: #ddd; margin: 5px 0; }
+    .deadline { color: #ffb0b0; font-size: .9rem; margin-top: 12px; }
+    .order-section {
+      background: #1a1a1a; border: 1px solid #383838; border-radius: 14px;
+      padding: 22px; margin-top: 24px;
+    }
+    .order-section h2 { margin-bottom: 14px; }
+    .selected-package-info {
+      background: #242424; padding: 14px; border-radius: 9px; margin-bottom: 18px;
+    }
+    .muted { color: #aaa; font-size: .95rem; }
+    .form-group { margin: 16px 0; }
+    label, .payment-label { display: block; margin-bottom: 8px; font-weight: 700; }
+    input[type="tel"], input[type="text"] {
+      width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #555;
+      background: #101010; color: #fff; font: inherit; outline: none;
+    }
+    input:focus { border-color: #ff4444; }
+    .error-message { color: #ff7777; font-size: .88rem; display: block; margin-top: 5px; }
+    .payment-methods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .payment-option {
+      border: 1px solid #444; border-radius: 10px; padding: 14px; cursor: pointer;
+      background: #151515;
+    }
+    .payment-option.selected { border-color: #ff4444; background: #2a1717; }
+    .payment-option input { accent-color: #ff4444; margin-right: 7px; }
+    .payment-title { font-weight: 800; font-size: 1.1rem; margin: 6px 0; }
+    .number-display { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+    .pay-number { font-weight: 700; letter-spacing: .3px; overflow-wrap: anywhere; }
+    button {
+      border: 0; border-radius: 8px; padding: 10px 14px; font: inherit;
+      font-weight: 700; cursor: pointer;
+    }
+    .copy-btn { background: #333; color: white; border: 1px solid #555; }
+    .submit-btn { width: 100%; background: #ff4444; color: white; padding: 13px; margin-top: 10px; }
+    .submit-btn:hover { background: #e83232; }
+    .copy-notification {
+      display: none; position: fixed; right: 20px; bottom: 20px; z-index: 1000;
+      background: #ff4444; color: white; padding: 12px 18px; border-radius: 8px;
+      font-weight: 700;
+    }
+    .copy-notification.show { display: block; animation: slideIn .25s ease; }
+    .success-message {
+      display: none; background: #287d3c; color: white; padding: 16px;
+      border-radius: 8px; margin-top: 18px; text-align: center; line-height: 1.7;
+    }
+    .success-message.show { display: block; }
+    @keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @media (max-width: 700px) {
+      body { padding: 12px; }
+      .packages { grid-template-columns: 1fr; }
+      .package-card { padding: 18px; }
+      .order-section { padding: 17px; }
+      .payment-methods { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>🌐 আনলিমিটেড ইন্টারনেট</h1>
+      <p>সাশ্রয়ী মূল্যে সীমাহীন ইন্টারনেট সুবিধা</p>
+    </header>
+
+    <div class="offer-banner">⏰ সীমিত সময়ের অফার — অফারটি শেষ হওয়ার আগে অর্ডার করুন</div>
+
+    <section class="packages" aria-label="ইন্টারনেট প্যাকেজ">
+      <div class="package-card" data-index="0" onclick="selectPackage(0)">
+        <h2>৩ মাসের প্যাকেজ</h2>
+        <div class="price">৳৮৪৯</div>
+        <div class="features">
+          <p>✓ আনলিমিটেড ইন্টারনেট</p>
+          <p>✓ ৩ মাসের মেয়াদ</p>
+          <p>✓ বর্ধিত সাবস্ক্রিপশন ফি</p>
+        </div>
+        <p class="deadline">অফার শেষ: অল্প সময়ের জন্য</p>
+      </div>
+
+      <div class="package-card" data-index="1" onclick="selectPackage(1)">
+        <h2>৬ মাসের প্যাকেজ</h2>
+        <div class="price">৳১২৬০</div>
+        <div class="features">
+          <p>✓ আনলিমিটেড ইন্টারনেট</p>
+          <p>✓ ৬ মাসের মেয়াদ</p>
+          <p>✓ বর্ধিত সাবস্ক্রিপশন ফি</p>
+        </div>
+        <p class="deadline">অফার শেষ: অল্প সময়ের জন্য</p>
+      </div>
+
+      <div class="package-card" data-index="2" onclick="selectPackage(2)">
+        <h2>১ বছরের প্যাকেজ</h2>
+        <div class="price">৳১৫৬৯</div>
+        <div class="features">
+          <p>✓ আনলিমিটেড ইন্টারনেট</p>
+          <p>✓ ১ বছরের মেয়াদ</p>
+          <p>✓ বর্ধিত সাবস্ক্রিপশন ফি</p>
+        </div>
+        <p class="deadline">অফার শেষ: অল্প সময়ের জন্য</p>
+      </div>
+    </section>
+
+    <section class="order-section" id="orderSection">
+      <h2>📝 আপনার অর্ডার</h2>
+      <div class="selected-package-info">
+        <p class="muted">নির্বাচিত প্যাকেজ:</p>
+        <h3 id="packageName">কোনো প্যাকেজ নির্বাচিত নয়</h3>
+        <div class="price" id="packagePrice">৳০</div>
+        <p id="packageDesc">অর্ডার করতে উপরের একটি প্যাকেজ নির্বাচন করুন।</p>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">📱 আপনার ফোন নম্বর</label>
+        <input type="tel" id="phoneNumber" placeholder="01XXXXXXXXX" maxlength="11" inputmode="numeric">
+        <span class="error-message" id="phoneError"></span>
+      </div>
+
+      <label class="payment-label">💳 পেমেন্ট পদ্ধতি নির্বাচন করুন</label>
+      <div class="payment-methods">
+        <div class="payment-option selected" id="bkashOption" onclick="selectPaymentMethod('bkash')">
+          <label><input type="radio" name="paymentMethod" value="bkash" checked> bKash</label>
+          <div class="payment-title">বিকাশ</div>
+          <p class="muted">পেমেন্ট নম্বর ব্যবহার করে টাকা পাঠান</p>
+          <div class="number-display">
+            <span class="pay-number">01580987778</span>
+            <button class="copy-btn" type="button" onclick="copyNumber('01580987778', event)">কপি করুন</button>
+          </div>
+        </div>
+        <div class="payment-option" id="nagadOption" onclick="selectPaymentMethod('nagad')">
+          <label><input type="radio" name="paymentMethod" value="nagad"> Nagad</label>
+          <div class="payment-title">নগদ</div>
+          <p class="muted">পেমেন্ট নম্বর ব্যবহার করে টাকা পাঠান</p>
+          <div class="number-display">
+            <span class="pay-number">01614175872</span>
+            <button class="copy-btn" type="button" onclick="copyNumber('01614175872', event)">কপি করুন</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transactionId">🔐 ট্রানজেকশন আইডি / রেফারেন্স নাম্বার</label>
+        <input type="text" id="transactionId" placeholder="Transaction ID লিখুন" autocomplete="off">
+        <p class="muted">পেমেন্ট করার পর আপনার Transaction ID এখানে জমা দিন।</p>
+      </div>
+
+      <button class="submit-btn" type="button" onclick="submitOrder()">অর্ডার জমা দিন</button>
+      <div class="success-message" id="successMessage"></div>
+      <p class="muted" style="margin-top:12px">নোট: এই পেজটি অর্ডারের তথ্য সার্ভারে পাঠায় না। জমা দেওয়া তথ্য শুধু এই পেজে দেখানো হয়।</p>
+    </section>
+  </main>
+
+  <div class="copy-notification" id="copyNotification">নম্বর কপি হয়েছে!</div>
+
+  <script>
+    const packages = [
+      { name: "৩ মাসের প্যাকেজ", price: 849, desc: "আনলিমিটেড ইন্টারনেট — ৩ মাস + সাবস্ক্রিপশন সুবিধা" },
+      { name: "৬ মাসের প্যাকেজ", price: 1260, desc: "আনলিমিটেড ইন্টারনেট — ৬ মাস + সাবস্ক্রিপশন সুবিধা" },
+      { name: "১ বছরের প্যাকেজ", price: 1569, desc: "আনলিমিটেড ইন্টারনেট — ১ বছর + সাবস্ক্রিপশন সুবিধা" }
+    ];
+    let selectedPackage = null;
+    let selectedPaymentMethod = "bkash";
+    let copyTimer = null;
+
+    function selectPackage(index) {
+      selectedPackage = packages[index];
+      document.querySelectorAll(".package-card").forEach((card, i) => {
+        card.classList.toggle("selected", i === index);
+      });
+      document.getElementById("packageName").textContent = selectedPackage.name;
+      document.getElementById("packagePrice").textContent = "৳" + selectedPackage.price.toLocaleString("bn-BD");
+      document.getElementById("packageDesc").textContent = selectedPackage.desc;
+      document.getElementById("orderSection").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      document.getElementById("bkashOption").classList.toggle("selected", method === "bkash");
+      document.getElementById("nagadOption").classList.toggle("selected", method === "nagad");
+      document.querySelector('input[name="paymentMethod"][value="bkash"]').checked = method === "bkash";
+      document.querySelector('input[name="paymentMethod"][value="nagad"]').checked = method === "nagad";
+    }
+
+    async function copyNumber(number, event) {
+      if (event) event.stopPropagation();
+      try {
+        await navigator.clipboard.writeText(number);
+      } catch (e) {
+        const temp = document.createElement("textarea");
+        temp.value = number;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+      const notification = document.getElementById("copyNotification");
+      notification.classList.add("show");
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => notification.classList.remove("show"), 1800);
+    }
+
+    function submitOrder() {
+      const phone = document.getElementById("phoneNumber").value.trim();
+      const transactionId = document.getElementById("transactionId").value.trim();
+      const phoneError = document.getElementById("phoneError");
+      const success = document.getElementById("successMessage");
+      phoneError.textContent = "";
+      success.classList.remove("show");
+
+      if (!selectedPackage) {
+        alert("আগে একটি প্যাকেজ নির্বাচন করুন।");
+        return;
+      }
+      if (!/^01[3-9]\d{8}$/.test(phone)) {
+        phoneError.textContent = "সঠিক ১১ সংখ্যার বাংলাদেশি মোবাইল নম্বর দিন।";
+        document.getElementById("phoneNumber").focus();
+        return;
+      }
+      if (!transactionId) {
+        alert("আপনার Transaction ID লিখুন।");
+        document.getElementById("transactionId").focus();
+        return;
+      }
+
+      const methodName = selectedPaymentMethod === "bkash" ? "বিকাশ" : "নগদ";
+      success.innerHTML =
+        "<strong>অর্ডারের তথ্য প্রস্তুত হয়েছে!</strong><br>" +
+        "প্যাকেজ: " + selectedPackage.name + "<br>" +
+        "মূল্য: ৳" + selectedPackage.price.toLocaleString("bn-BD") + "<br>" +
+        "ফোন নম্বর: " + phone + "<br>" +
+        "পেমেন্ট: " + methodName + "<br>" +
+        "Transaction ID: " + transactionId +
+        "<br><br>মনে রাখবেন: এই তথ্য স্বয়ংক্রিয়ভাবে মালিকের কাছে পাঠানো হয়নি।";
+      success.classList.add("show");
+      success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  </script>
+</body>
+</html>
