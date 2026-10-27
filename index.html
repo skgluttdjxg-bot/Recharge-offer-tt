@@ -12,8 +12,21 @@
     }
     .container { max-width: 900px; margin: 0 auto; }
     header { text-align: center; padding: 18px 10px 24px; }
-    header h1 { color: #ff4444; font-size: clamp(1.6rem, 5vw, 2.4rem); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .header-logo { width: 36px; height: 36px; object-fit: contain; }
+    header h1 { 
+      color: #ff4444; 
+      font-size: clamp(1.6rem, 5vw, 2.4rem); 
+      margin-bottom: 8px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 12px; 
+      flex-wrap: wrap;
+    }
+    .header-logo { 
+      width: 64px; 
+      height: 64px; 
+      object-fit: contain; 
+    }
     header p { color: #ccc; }
     .offer-banner {
       background: #ff4444; color: white; padding: 14px 16px; border-radius: 10px;
@@ -84,6 +97,7 @@
       .package-card { padding: 18px; }
       .order-section { padding: 17px; }
       .payment-methods { grid-template-columns: 1fr; }
+      .header-logo { width: 50px; height: 50px; }
     }
   </style>
 </head>
@@ -154,7 +168,7 @@
         <div class="payment-option selected" id="bkashOption" onclick="selectPaymentMethod('bkash')">
           <label><input type="radio" name="paymentMethod" value="bkash" checked> bKash</label>
           <div class="payment-title">
-            <img src="Images (2).png" alt="bKash Logo" class="payment-logo"> বিকাশ
+            <img src="images (2).png" alt="bKash Logo" class="payment-logo"> বিকাশ
           </div>
           <p class="muted"> সেন্ডমানি করুন </p>
           <div class="number-display">
