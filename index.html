@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Robi আনলিমিটেড ইন্টারনেট প্যাকেজ</title>
+  <title>Robi আনলিমিটেড ইন্টারনেট প্যাকেজ</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -12,7 +12,8 @@
     }
     .container { max-width: 900px; margin: 0 auto; }
     header { text-align: center; padding: 18px 10px 24px; }
-    header h1 { color: #ff4444; font-size: clamp(1.6rem, 5vw, 2.4rem); margin-bottom: 8px; }
+    header h1 { color: #ff4444; font-size: clamp(1.6rem, 5vw, 2.4rem); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .header-logo { width: 36px; height: 36px; object-fit: contain; }
     header p { color: #ccc; }
     .offer-banner {
       background: #ff4444; color: white; padding: 14px 16px; border-radius: 10px;
@@ -54,7 +55,8 @@
     }
     .payment-option.selected { border-color: #ff4444; background: #2a1717; }
     .payment-option input { accent-color: #ff4444; margin-right: 7px; }
-    .payment-title { font-weight: 800; font-size: 1.1rem; margin: 6px 0; }
+    .payment-title { font-weight: 800; font-size: 1.1rem; margin: 6px 0; display: flex; align-items: center; gap: 8px; }
+    .payment-logo { width: 24px; height: 24px; object-fit: contain; border-radius: 4px; }
     .number-display { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
     .pay-number { font-weight: 700; letter-spacing: .3px; overflow-wrap: anywhere; }
     button {
@@ -88,7 +90,10 @@
 <body>
   <main class="container">
     <header>
-      <h1>🌐 আনলিমিটেড ইন্টারনেট</h1>
+      <h1>
+        <img src="1000106691-removebg-preview.png" alt="Logo" class="header-logo"> 
+        আনলিমিটেড ইন্টারনেট
+      </h1>
       <p>সাশ্রয়ী মূল্যে সীমাহীন ইন্টারনেট সুবিধা</p>
     </header>
 
@@ -148,7 +153,9 @@
       <div class="payment-methods">
         <div class="payment-option selected" id="bkashOption" onclick="selectPaymentMethod('bkash')">
           <label><input type="radio" name="paymentMethod" value="bkash" checked> bKash</label>
-          <div class="payment-title">বিকাশ</div>
+          <div class="payment-title">
+            <img src="Images (2).png" alt="bKash Logo" class="payment-logo"> বিকাশ
+          </div>
           <p class="muted"> সেন্ডমানি করুন </p>
           <div class="number-display">
             <span class="pay-number">01580987778</span>
@@ -157,7 +164,9 @@
         </div>
         <div class="payment-option" id="nagadOption" onclick="selectPaymentMethod('nagad')">
           <label><input type="radio" name="paymentMethod" value="nagad"> Nagad</label>
-          <div class="payment-title">নগদ</div>
+          <div class="payment-title">
+            <img src="2057_4-78566033-icon.jpg" alt="Nagad Logo" class="payment-logo"> নগদ
+          </div>
           <p class="muted"> সেন্ডমানি করুন</p>
           <div class="number-display">
             <span class="pay-number">01614175872</span>
